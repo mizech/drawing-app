@@ -22,8 +22,9 @@ class MainActivity : AppCompatActivity() {
            val iPercentage = percentage.text.toString().toInt()
 
            val dTotal = dAmount + ((iPercentage * dAmount) / 100)
+           val totalFormatted = "%.2f".format(dTotal)
 
-           total.setText("Bill plus tip is $dTotal")
+           total.setText("Bill plus tip is $totalFormatted Euro")
            total.visibility = View.VISIBLE
        }
    }
