@@ -1,12 +1,15 @@
 package com.example.emojidictionary
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_details.view.*
 import kotlinx.android.synthetic.main.recycler_item.view.*
 
 class RecyclerAdapter(val items: ArrayList<String>, val context: Context):
@@ -17,7 +20,11 @@ class RecyclerAdapter(val items: ArrayList<String>, val context: Context):
 
         init {
             view.setOnClickListener {
-                Toast.makeText(context, "Testing 123 ...", Toast.LENGTH_LONG).show()
+                val emojiChar = it.emojiTextView.text
+
+                val detailIntent = Intent(view.context, DetailsActivity::class.java)
+                detailIntent.putExtra("emoji", emojiChar)
+                startActivity(view.context, detailIntent, null)
             }
         }
     }
@@ -32,6 +39,6 @@ class RecyclerAdapter(val items: ArrayList<String>, val context: Context):
     }
 
     override fun onBindViewHolder(holder: TextHolder, position: Int) {
-        holder?.emoji.text = "😀 " + items[position]
+        holder?.emoji.text = items[position]
     }
 }
