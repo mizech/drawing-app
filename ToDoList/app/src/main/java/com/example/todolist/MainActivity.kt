@@ -4,11 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.TokenWatcher
 import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -20,10 +23,31 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         var prefs
-                = getSharedPreferences("com.example.todolist.prefs", Context.MODE_PRIVATE)
-        val set = prefs.getStringSet("toDoStrings", mutableSetOf())
+                = getSharedPreferences(getString(R.string.SHARED_PREF_NAME), Context.MODE_PRIVATE)
+        val set
+                = prefs.getStringSet(getString(R.string.TODO_STRINGS), mutableSetOf())
 
-        set?.forEach { str -> Log.i("+++", str) }
+        set!!.add("Test 123")
+        set!!.add("Test 4")
+        set!!.add("Test 5")
+        set!!.add("Test 6")
+        set!!.add("Test 635")
+        set!!.add("Test 63")
+        set!!.add("Test 6z")
+        set!!.add("Test 6y")
+        set!!.add("Test 6x0")
+        set!!.add("Test 6x1")
+        set!!.add("Test 6x2")
+        set!!.add("Test 6x3")
+        set!!.add("Test 6x2")
+        set!!.add("Test 6x2x")
+        set!!.add("Test 6x2y")
+        set!!.add("Test 6x2z")
+
+        Toast.makeText(this, set!!.size.toString(), Toast.LENGTH_LONG).show()
+
+        recycler_view.layoutManager = LinearLayoutManager(this)
+        recycler_view.adapter = ItemsAdapter(set!!, this)
 
         fab.setOnClickListener { view ->
             val intent = Intent(applicationContext, CreateToDo::class.java)

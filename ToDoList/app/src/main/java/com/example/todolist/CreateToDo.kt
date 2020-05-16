@@ -21,8 +21,10 @@ class CreateToDo : AppCompatActivity() {
             }
 
             var prefs
-                    = getSharedPreferences("com.example.todolist.prefs", Context.MODE_PRIVATE)
-            var todos = prefs.getStringSet("toDoStrings", mutableSetOf())
+                    = getSharedPreferences(getString(R.string.SHARED_PREF_NAME),
+                                            Context.MODE_PRIVATE)
+            var todos
+                    = prefs.getStringSet(getString(R.string.TODO_STRINGS), mutableSetOf())
             todos?.add(title)
 
             prefs.edit().putStringSet("toDoStrings", todos).commit()
