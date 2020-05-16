@@ -1,6 +1,10 @@
 package com.example.todolist
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
@@ -15,9 +19,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        var prefs
+                = getSharedPreferences("com.example.todolist.prefs", Context.MODE_PRIVATE)
+        val set = prefs.getStringSet("toDoStrings", mutableSetOf())
+
+        set?.forEach { str -> Log.i("+++", str) }
+
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            val intent = Intent(applicationContext, CreateToDo::class.java)
+            startActivity(intent)
         }
     }
 
