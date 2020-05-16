@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    lateinit var layoutManager: LinearLayoutManager
+    lateinit var adapter: ItemsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,33 +28,29 @@ class MainActivity : AppCompatActivity() {
                 = getSharedPreferences(getString(R.string.SHARED_PREF_NAME), Context.MODE_PRIVATE)
         val set
                 = prefs.getStringSet(getString(R.string.TODO_STRINGS), mutableSetOf())
-
-        set!!.add("Test 123")
-//        set!!.add("Test 4")
-//        set!!.add("Test 5")
-//        set!!.add("Test 6")
-//        set!!.add("Test 635")
-//        set!!.add("Test 63")
-//        set!!.add("Test 6z")
-//        set!!.add("Test 6y")
-//        set!!.add("Test 6x0")
-//        set!!.add("Test 6x1")
-//        set!!.add("Test 6x2")
-//        set!!.add("Test 6x3")
-//        set!!.add("Test 6x2")
-//        set!!.add("Test 6x2x")
-//        set!!.add("Test 6x2y")
-//        set!!.add("Test 6x2z")
-
-        Toast.makeText(this, set!!.size.toString(), Toast.LENGTH_LONG).show()
-
-        recycler_view.layoutManager = LinearLayoutManager(this)
-        recycler_view.adapter = ItemsAdapter(set!!, this)
+        layoutManager = LinearLayoutManager(this)
+        recycler_view.layoutManager = layoutManager
+        adapter = ItemsAdapter(set!!, this)
+        recycler_view.adapter = adapter
 
         fab.setOnClickListener { view ->
             val intent = Intent(applicationContext, CreateToDo::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        var prefs
+                = getSharedPreferences(getString(R.string.SHARED_PREF_NAME), Context.MODE_PRIVATE)
+        val set
+                = prefs.getStringSet(getString(R.string.TODO_STRINGS), mutableSetOf())
+
+        layoutManager = LinearLayoutManager(this)
+        recycler_view.layoutManager = layoutManager
+        adapter = ItemsAdapter(set!!, this)
+        recycler_view.adapter = ItemsAdapter(set!!, this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

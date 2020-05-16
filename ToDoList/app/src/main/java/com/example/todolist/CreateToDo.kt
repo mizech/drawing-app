@@ -15,7 +15,7 @@ class CreateToDo : AppCompatActivity() {
         createToDo.setOnClickListener {
             var title = ""
             if (important.isChecked) {
-                title = "‼" + toDoDescriptor.text.toString()
+                title = "‼ " + toDoDescriptor.text.toString()
             } else {
                 title = toDoDescriptor.text.toString()
             }
@@ -23,11 +23,13 @@ class CreateToDo : AppCompatActivity() {
             var prefs
                     = getSharedPreferences(getString(R.string.SHARED_PREF_NAME),
                                             Context.MODE_PRIVATE)
+            var editor = prefs.edit()
             var todos
                     = prefs.getStringSet(getString(R.string.TODO_STRINGS), mutableSetOf())
             todos?.add(title)
 
-            prefs.edit().putStringSet("toDoStrings", todos).commit()
+            editor.putStringSet("toDoStrings", todos)
+            editor.apply()
 
             finish()
         }
