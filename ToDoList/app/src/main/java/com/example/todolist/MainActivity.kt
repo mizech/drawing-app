@@ -26,8 +26,12 @@ class MainActivity : AppCompatActivity() {
 
         var prefs
                 = getSharedPreferences(getString(R.string.SHARED_PREF_NAME), Context.MODE_PRIVATE)
-        val set
+        var set
                 = prefs.getStringSet(getString(R.string.TODO_STRINGS), mutableSetOf())
+
+        val editor = prefs.edit()
+        editor.clear().commit()
+
         layoutManager = LinearLayoutManager(this)
         recycler_view.layoutManager = layoutManager
         adapter = ItemsAdapter(set!!, this)

@@ -1,9 +1,12 @@
 package com.example.todolist
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.todo_item.view.*
 
@@ -12,11 +15,20 @@ class ItemsAdapter(val items: MutableSet<String>, val context: Context):
 
     inner class ItemHolder(view: View): RecyclerView.ViewHolder(view) {
         val toDoTextView = view.todo_item
+
+        init {
+            toDoTextView.setOnClickListener {
+                val intent = Intent(view.context, CompleteToDo::class.java)
+                intent.putExtra("toDoText", toDoTextView.text.toString())
+                context.startActivity(intent)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
-        return ItemHolder(LayoutInflater.from(context)
-                            .inflate(R.layout.todo_item, parent, false))
+        val itemHolder = ItemHolder(LayoutInflater.from(context)
+            .inflate(R.layout.todo_item, parent, false))
+        return itemHolder
     }
 
     override fun getItemCount(): Int {

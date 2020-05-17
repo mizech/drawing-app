@@ -23,7 +23,7 @@ class CreateToDo : AppCompatActivity() {
             var prefs
                     = getSharedPreferences(getString(R.string.SHARED_PREF_NAME),
                                             Context.MODE_PRIVATE)
-            var editor = prefs.edit()
+            val editor = prefs.edit()
             var todos
                     = prefs.getStringSet(getString(R.string.TODO_STRINGS), mutableSetOf())
             todos?.add(title)
