@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ToDo Liste</string>
+    <string name="action_delete_todos">Alle ToDos löschen</string>
+    <string name="set_complete">Erledigt!</string>
+    <string name="important">Als wichtig markieren.</string>
+    <string name="enter_todo">ToDo eingeben ...</string>
+    <string name="create_todo">ToDo anlegen</string>
+</resources>
