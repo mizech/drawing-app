@@ -3,7 +3,6 @@ package com.example.todolist
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_create_to_do.*
 
 class CreateToDo : AppCompatActivity() {

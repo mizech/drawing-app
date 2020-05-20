@@ -20,7 +20,7 @@ class ItemsAdapter(val items: MutableSet<String>, val context: Context):
             toDoTextView.setOnClickListener {
                 val intent = Intent(view.context, CompleteToDo::class.java)
                 intent.putExtra("toDoText", toDoTextView.text.toString())
-                context.startActivity(intent)
+                startActivity(view.context, intent, null)
             }
         }
     }
