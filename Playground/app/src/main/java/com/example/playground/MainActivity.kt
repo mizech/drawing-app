@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
@@ -14,11 +15,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        goTo.setOnClickListener {
-            var intent = Intent(this, SecondActivity::class.java)
-            intent.putExtra("name", "Michael Zech")
-            startActivityForResult(intent, 1)
-        }
+        goTo.setOnClickListener(object: View.OnClickListener {
+            override fun onClick(v: View?) {
+                Toast.makeText(applicationContext, "Testing 1234 ...", Toast.LENGTH_LONG)
+                    .show()
+            }
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
