@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Playground</string>
+
+    <string-array name="numbers">
+        <item>Normal</item>
+        <item>Super</item>
+        <item>Diesel</item>
+    </string-array>
 </resources>
