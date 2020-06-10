@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">WeightOnMars</string>
-    <string name="weight_label">What\'s your weight on Mars?</string>
-    <string name="hint_weight">Enter your weight ...</string>
-    <string name="mars_label">Mars</string>
-    <string name="venus_label">Venus</string>
-    <string name="jupiter_label">Jupiter</string>
-</resources>
