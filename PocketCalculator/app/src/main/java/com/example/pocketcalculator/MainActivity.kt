@@ -56,10 +56,55 @@ class MainActivity : AppCompatActivity() {
                     var two = segments[1].toFloat()
 
                     if (!prefix.isEmpty()) {
-                        one = one * -1
+                        one *= -1
                     }
 
                     display.setText((one - two).toString())
+                } else if (value.contains("+")) {
+                    if (value.startsWith("-")) {
+                        prefix = "-"
+                        value = value.substring(1)
+                    }
+
+                    val segments = value.split("+")
+                    var one = segments[0].toFloat()
+                    var two = segments[1].toFloat()
+
+                    if (!prefix.isEmpty()) {
+                        one *= -1
+                    }
+
+                    display.setText((one + two).toString())
+                } else if (value.contains("*")) {
+                    if (value.startsWith("-")) {
+                        prefix = "-"
+                        value = value.substring(1)
+                    }
+
+                    val segments = value.split("*")
+                    var one = segments[0].toFloat()
+                    var two = segments[1].toFloat()
+
+                    if (!prefix.isEmpty()) {
+                        one *= -1
+                    }
+
+                    display.setText((one * two).toString())
+                } else {
+                    if (value.startsWith("-")) {
+                        prefix = "-"
+                        value = value.substring(1)
+                    }
+
+                    val segments = value.split("/")
+                    var one = segments[0].toFloat()
+                    var two = segments[1].toFloat()
+
+                    if (!prefix.isEmpty()) {
+                        one *= -1
+                    }
+
+                    display.setText((one / two).toString())
                 }
             } catch (e: ArithmeticException) {
                 e.printStackTrace()
