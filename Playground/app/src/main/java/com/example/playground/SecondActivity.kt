@@ -16,6 +16,10 @@ class SecondActivity : AppCompatActivity() {
             val intent = Intent()
             var str = nameText.text.toString()
             intent.putExtra("msg", str)
+
+            var email = emailText.text.toString()
+            intent.putExtra("emailAddress", email)
+
             setResult(Activity.RESULT_OK, intent)
             finish()
         }

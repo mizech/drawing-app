@@ -28,10 +28,8 @@ class MainActivity : AppCompatActivity() {
         goToSecond.setOnClickListener {
             val intent = Intent(this, SecondActivity::class.java)
             startActivityForResult(intent, SECOND_ACTIVITY_CODE)
-
         }
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -44,7 +42,8 @@ class MainActivity : AppCompatActivity() {
             } else if (requestCode == SECOND_ACTIVITY_CODE) {
                 if (data != null) {
                     val msg = data.getStringExtra("msg")
-                    message.setText(msg)
+                    val email = data.getStringExtra("emailAddress")
+                    message.setText("$msg, $email")
                 }
             }
         }
