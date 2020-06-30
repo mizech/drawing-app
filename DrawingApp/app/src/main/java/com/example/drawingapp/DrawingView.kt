@@ -2,11 +2,11 @@ package com.example.drawingapp
 
 import android.content.Context
 import android.graphics.*
-import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 
-class DrawingView(context: Context, attrs: AttributeSet): View(context, attrs) {
+class DrawingView(context: Context): View(context) {
     private var mDrawPath: CustomPath? = null
     private var mCanvasBitmap: Bitmap? = null
     private var mDrawPaint: Paint? = null
@@ -39,11 +39,23 @@ class DrawingView(context: Context, attrs: AttributeSet): View(context, attrs) {
         canvas = Canvas(mCanvasBitmap!!)
     }
 
+    fun setSizeForBrush(newSize: Float) {
+        mBrushSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+            newSize, resources.displayMetrics)
+        mDrawPaint!!.strokeWidth = mBrushSize
+    }
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        canvas.drawBitmap(
-            mCanvasBitmap!!, 0f, 0f, mCanvasPaint)
+        canvas.drawBitmap(mCanvasBitmap!!, 0f, 0f, mCanvasPaint)
+
+        for (path in mPaths) {
+            mDrawPaint!!.strokeWidth = path.brushThickness
+            mDrawPaint!!.color = mDrawPath!!.color
+            canvas.drawPath(path, mDrawPaint!!)
+        }
+
         if (!mDrawPath!!.isEmpty) {
             mDrawPaint!!.strokeWidth = mDrawPath!!.brushThickness
             mDrawPaint!!.color = mDrawPath!!.color
@@ -73,6 +85,7 @@ class DrawingView(context: Context, attrs: AttributeSet): View(context, attrs) {
             }
 
             MotionEvent.ACTION_UP -> {
+                mPaths.add(mDrawPath!!)
                 mDrawPath = CustomPath(color, mBrushSize)
             }
             else -> return false
