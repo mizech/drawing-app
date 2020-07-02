@@ -1,51 +1,37 @@
 package com.example.playground
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Intent
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.widget.Button
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.my_dialog.*
 
 class MainActivity : AppCompatActivity() {
-    companion object {
-        private const val FIRST_ACTIVITY_CODE = 1
-        private const val SECOND_ACTIVITY_CODE = 2
-        const val NAME = "name"
-    }
+    var inputReceived: String? = null
 
-    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        goToFirst.setOnClickListener {
-            val intent = Intent(this, FirstActivity::class.java)
-            startActivityForResult(intent, FIRST_ACTIVITY_CODE)
-        }
+        textReceived.text = inputReceived ?: ""
 
-        goToSecond.setOnClickListener {
-            val intent = Intent(this, SecondActivity::class.java)
-            startActivityForResult(intent, SECOND_ACTIVITY_CODE)
-        }
-    }
+        showDialog.setOnClickListener {
+            val dialog = Dialog(this)
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+            dialog.setContentView(R.layout.my_dialog)
 
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == FIRST_ACTIVITY_CODE) {
-                message.setText("First Activity Result Success!")
-            } else if (resultCode == Activity.RESULT_CANCELED) {
-                Log.e("Cancelled", "Activity cancelled.")
-            } else if (requestCode == SECOND_ACTIVITY_CODE) {
-                if (data != null) {
-                    val msg = data.getStringExtra("msg")
-                    val email = data.getStringExtra("emailAddress")
-                    message.setText("$msg, $email")
-                }
+            dialog.findViewById<Button>(R.id.closeDialog)
+                    .setOnClickListener {
+                dialog.dismiss()
             }
+
+            dialog.findViewById<Button>(R.id.writeText)
+                    .setOnClickListener {
+                inputReceived = inputText.text?.toString()
+            }
+
+            dialog.show()
         }
     }
 }
