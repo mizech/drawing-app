@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="special">
+        <item name="background">@color/colorPrimaryDark</item>
+        <item name="color">@color/colorAccent</item>
+    </style>
+
 </resources>
