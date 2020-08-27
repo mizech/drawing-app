@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.pm.LauncherApps
 import android.graphics.*
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.View
 
 class DrawingView(context: Context, attrs: AttributeSet)
@@ -37,12 +38,44 @@ class DrawingView(context: Context, attrs: AttributeSet)
         canvas = Canvas(mCanvasBitmap!!)
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        canvas?.drawBitmap(mCanvasBitmap!!, 0f, 0f, mCanvasPaint)
+        canvas.drawBitmap(mCanvasBitmap!!, 0f, 0f, mCanvasPaint)
+
+        if (!mDrawPath!!.isEmpty) {
+            mDrawPaint!!.strokeWidth = mDrawPath!!.brushThick
+            mDrawPaint!!.color = mDrawPath!!.color
+            canvas.drawPath(mDrawPath!!, mDrawPaint!!)
+        }
     }
 
-    internal inner class CustomPath(val color: Int, var brushThick: Float)
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        val touchX = event?.x;
+        val touchY = event?.y;
+
+        when (event?.action) {
+            MotionEvent.ACTION_DOWN -> {
+                mDrawPath!!.color = color
+                mDrawPath!!.brushThick = mBrushSize
+
+                mDrawPath!!.reset()
+                mDrawPath!!.moveTo(touchX!!, touchY!!)
+            }
+            MotionEvent.ACTION_MOVE -> {
+                mDrawPath!!.lineTo(touchX!!, touchY!!)
+            }
+            MotionEvent.ACTION_UP -> {
+                mDrawPath = CustomPath(color, mBrushSize)
+            }
+            else -> return false
+        }
+
+        invalidate()
+
+        return true
+    }
+
+    internal inner class CustomPath(var color: Int, var brushThick: Float)
         : Path() {
 
     }
