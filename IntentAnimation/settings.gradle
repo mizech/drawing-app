@@ -1,0 +1,2 @@
+rootProject.name='IntentAnimation'
+include ':app'
