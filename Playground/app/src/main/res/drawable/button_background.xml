@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>/Library/WebServer/Documents/online-sale/app/javascript/components/shared/helpers.js
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <stroke android:color="#FF00FF" android:width="5dp"></stroke>
+    <solid android:color="#77777777"></solid>
+    <corners android:radius="10dp"></corners>
+</shape>
