@@ -16,21 +16,22 @@
         app:layout_constraintBottom_toTopOf="@id/ib_brush"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        ></FrameLayout>
-    
-    <com.mizech.drawingapp.DrawingView
-        android:id="@+id/drawing_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="6dp"
-        android:layout_marginBottom="80dp"
-        android:background="@drawable/rectangle"
-        app:layout_constraintBottom_toTopOf="@id/ib_brush"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" >
+        <ImageView
+            android:id="@+id/iv_background"
+            android:scaleType="centerCrop"
+            android:src="@drawable/image"
+            android:contentDescription="Background Description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <com.mizech.drawingapp.DrawingView
+            android:id="@+id/drawing_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="80dp"
+            android:background="#80FFFFFF" />
+    </FrameLayout>
+
     <LinearLayout
         android:id="@+id/ll_paint_colors"
         android:layout_width="wrap_content"
@@ -38,7 +39,7 @@
         app:layout_constraintBottom_toTopOf="@id/ib_brush"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/drawing_view"
+        app:layout_constraintTop_toBottomOf="@id/fl_drawing_view_container"
         android:layout_marginBottom="35dp"
         android:orientation="horizontal">
         <ImageButton
