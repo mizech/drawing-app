@@ -42,6 +42,10 @@ class MainActivity : AppCompatActivity() {
                 requestStoragePermission()
             }
         }
+
+        ib_undo.setOnClickListener {
+            drawing_view.onClickUndo()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -53,6 +57,10 @@ class MainActivity : AppCompatActivity() {
                     if (data!!.data != null) {
                         iv_background.visibility = View.VISIBLE
                         iv_background.setImageURI(data.data)
+                    } else {
+                        Toast.makeText(this,
+                            "Error occurred while trying to add the immage",
+                            Toast.LENGTH_LONG).show()
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()

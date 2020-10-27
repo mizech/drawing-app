@@ -16,6 +16,7 @@ class DrawingView(context: Context, attrs: AttributeSet): View(context, attrs) {
     private var color = Color.BLACK
     private var canvas: Canvas? = null
     private val mPaths = ArrayList<CustomPath>()
+    private var mUndoPaths = ArrayList<CustomPath>()
 
     init {
         setUpDrawing()
@@ -30,6 +31,13 @@ class DrawingView(context: Context, attrs: AttributeSet): View(context, attrs) {
         mDrawPaint!!.strokeCap = Paint.Cap.ROUND
         mCanvasPaint = Paint(Paint.DITHER_FLAG)
         mBrushSize = 20.toFloat()
+    }
+
+    fun onClickUndo() {
+        if (mPaths.size > 0) {
+            mUndoPaths.add(mPaths.removeAt(mPaths.size - 1))
+            invalidate()
+        }
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -96,7 +104,5 @@ class DrawingView(context: Context, attrs: AttributeSet): View(context, attrs) {
     }
 
     internal inner class CustomPath(var color: Int, var brushThickness: Float):
-        Path() {
-
-    }
+        Path() {}
 }
