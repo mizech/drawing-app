@@ -4,7 +4,7 @@ Code-along project from the Udemy-course [The Complete Android 10 & Kotlin Devel
 
 <div>
   <img src="./images/image1.png" alt="screenshot 1" width="280" />&nbsp;&nbsp; 
-  <img src="./images/image2.png" alt="screenshot 2" width="280" /> 
+  <img src="./images/image2.png" alt="screenshot 2" width="280" />&nbsp;&nbsp;
   <img src="./images/image3.png" alt="screenshot 3" width="280" />
 </div>
 
